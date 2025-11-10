@@ -42,3 +42,7 @@ resilience4j:
         wait-duration-in-open-state: 5s
         failure-rate-threshold: 50
 
+spring.security.oauth2.resourceserver.jwt:
+  issuer-uri: http://localhost:8080/realms/conference-realm
+  jwk-set-uri: http://localhost:8080/realms/conference-realm/protocol/openid-connect/certs
+

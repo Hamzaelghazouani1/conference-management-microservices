@@ -1,0 +1,41 @@
+server:
+  port: 8888
+
+spring:
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+          lower-case-service-id: true
+      routes:
+        - id: keynote-service
+          uri: lb://KEYNOTE-SERVICE
+          predicates:
+            - Path=/keynote-service/**
+          filters:
+            - StripPrefix=1
+        - id: conference-service
+          uri: lb://CONFERENCE-SERVICE
+          predicates:
+            - Path=/conference-service/**
+          filters:
+            - StripPrefix=1
+      globalcors:
+        corsConfigurations:
+          '[/**]':
+            allowedOrigins: "*"
+            allowedMethods:
+              - GET
+              - POST
+              - PUT
+              - DELETE
+              - OPTIONS
+            allowedHeaders: "*"
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+

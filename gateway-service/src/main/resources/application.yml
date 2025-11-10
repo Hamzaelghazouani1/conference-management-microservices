@@ -1,0 +1,31 @@
+server:
+  port: 8888
+
+spring:
+  application:
+    name: gateway-service
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+          lower-case-service-id: true
+      routes:
+        - id: keynote-service
+          uri: lb://KEYNOTE-SERVICE
+          predicates:
+            - Path=/keynote-service/**
+          filters:
+            - StripPrefix=1
+        - id: conference-service
+          uri: lb://CONFERENCE-SERVICE
+          predicates:
+            - Path=/conference-service/**
+          filters:
+            - StripPrefix=1
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+

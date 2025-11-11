@@ -1,0 +1,122 @@
+<div class="page-header text-center">
+  <div class="container">
+    <h1><i class="bi bi-calendar-event me-3"></i>Système de Gestion de Conférences</h1>
+    <p class="lead mt-3">Application basée sur une architecture Microservices</p>
+  </div>
+</div>
+
+<div class="container">
+  <!-- Statistics -->
+  <div class="row mb-5">
+    <div class="col-md-4 mb-3">
+      <div class="stat-card">
+        <div class="stat-number">{{ keynoteCount() }}</div>
+        <div class="stat-label"><i class="bi bi-people me-2"></i>Keynotes</div>
+      </div>
+    </div>
+    <div class="col-md-4 mb-3">
+      <div class="stat-card stat-card-pink">
+        <div class="stat-number">{{ conferenceCount() }}</div>
+        <div class="stat-label"><i class="bi bi-calendar-check me-2"></i>Conférences</div>
+      </div>
+    </div>
+    <div class="col-md-4 mb-3">
+      <div class="stat-card stat-card-cyan">
+        <div class="stat-number">{{ totalInscrits() }}</div>
+        <div class="stat-label"><i class="bi bi-person-check me-2"></i>Inscrits</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Quick Access -->
+  <div class="row">
+    <div class="col-md-6 mb-4">
+      <div class="card h-100">
+        <div class="card-header">
+          <i class="bi bi-people me-2"></i>Gestion des Keynotes
+        </div>
+        <div class="card-body">
+          <p class="card-text">
+            Gérez les intervenants de vos conférences. Ajoutez, modifiez ou supprimez des keynotes.
+          </p>
+          <ul class="list-unstyled">
+            <li><i class="bi bi-check-circle text-success me-2"></i>Créer de nouveaux keynotes</li>
+            <li><i class="bi bi-check-circle text-success me-2"></i>Rechercher par nom ou fonction</li>
+            <li><i class="bi bi-check-circle text-success me-2"></i>Modifier les informations</li>
+          </ul>
+          <a routerLink="/keynotes" class="btn btn-primary">
+            <i class="bi bi-arrow-right me-2"></i>Voir les Keynotes
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-6 mb-4">
+      <div class="card h-100">
+        <div class="card-header card-header-pink">
+          <i class="bi bi-calendar-check me-2"></i>Gestion des Conférences
+        </div>
+        <div class="card-body">
+          <p class="card-text">
+            Organisez vos conférences académiques et commerciales. Gérez les inscriptions et les reviews.
+          </p>
+          <ul class="list-unstyled">
+            <li><i class="bi bi-check-circle text-success me-2"></i>Planifier des conférences</li>
+            <li><i class="bi bi-check-circle text-success me-2"></i>Attribuer des keynotes</li>
+            <li><i class="bi bi-check-circle text-success me-2"></i>Gérer les reviews</li>
+          </ul>
+          <a routerLink="/conferences" class="btn btn-primary btn-pink">
+            <i class="bi bi-arrow-right me-2"></i>Voir les Conférences
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Architecture Info -->
+  <div class="card mt-4">
+    <div class="card-header card-header-dark">
+      <i class="bi bi-diagram-3 me-2"></i>Architecture Technique
+    </div>
+    <div class="card-body">
+      <div class="row text-center">
+        <div class="col-md-2 col-6 mb-3">
+          <div class="p-3 bg-light rounded">
+            <i class="bi bi-hdd-network text-primary" style="font-size: 2rem;"></i>
+            <p class="mt-2 mb-0 small">Eureka Discovery</p>
+          </div>
+        </div>
+        <div class="col-md-2 col-6 mb-3">
+          <div class="p-3 bg-light rounded">
+            <i class="bi bi-gear text-primary" style="font-size: 2rem;"></i>
+            <p class="mt-2 mb-0 small">Config Server</p>
+          </div>
+        </div>
+        <div class="col-md-2 col-6 mb-3">
+          <div class="p-3 bg-light rounded">
+            <i class="bi bi-shield-check text-primary" style="font-size: 2rem;"></i>
+            <p class="mt-2 mb-0 small">Gateway</p>
+          </div>
+        </div>
+        <div class="col-md-2 col-6 mb-3">
+          <div class="p-3 bg-light rounded">
+            <i class="bi bi-people text-primary" style="font-size: 2rem;"></i>
+            <p class="mt-2 mb-0 small">Keynote Service</p>
+          </div>
+        </div>
+        <div class="col-md-2 col-6 mb-3">
+          <div class="p-3 bg-light rounded">
+            <i class="bi bi-calendar text-primary" style="font-size: 2rem;"></i>
+            <p class="mt-2 mb-0 small">Conference Service</p>
+          </div>
+        </div>
+        <div class="col-md-2 col-6 mb-3">
+          <div class="p-3 bg-light rounded">
+            <i class="bi bi-key text-primary" style="font-size: 2rem;"></i>
+            <p class="mt-2 mb-0 small">Keycloak</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

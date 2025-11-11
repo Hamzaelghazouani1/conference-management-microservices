@@ -1,3 +1,7 @@
+/* Import Bootstrap */
+@import 'bootstrap/dist/css/bootstrap.min.css';
+@import 'bootstrap-icons/font/bootstrap-icons.css';
+
 /* Global Styles */
 :root {
   --primary-color: #4361ee;
@@ -46,6 +50,22 @@ body {
   font-weight: 600;
 }
 
+.card-header-pink {
+  background: linear-gradient(135deg, #f72585 0%, #b5179e 100%);
+}
+
+.card-header-dark {
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+}
+
+.card-header-academique {
+  background: linear-gradient(135deg, #4895ef 0%, #4361ee 100%);
+}
+
+.card-header-commerciale {
+  background: linear-gradient(135deg, #f72585 0%, #b5179e 100%);
+}
+
 /* Button Styles */
 .btn-primary {
   background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
@@ -59,6 +79,14 @@ body {
 .btn-primary:hover {
   transform: translateY(-2px);
   box-shadow: 0 5px 15px rgba(67, 97, 238, 0.4);
+}
+
+.btn-pink {
+  background: linear-gradient(135deg, #f72585 0%, #b5179e 100%);
+}
+
+.btn-pink:hover {
+  box-shadow: 0 5px 15px rgba(247, 37, 133, 0.4);
 }
 
 .btn-outline-primary {
@@ -133,6 +161,10 @@ body {
   border-radius: 0 0 30px 30px;
 }
 
+.page-header-pink {
+  background: linear-gradient(135deg, #f72585 0%, #b5179e 100%);
+}
+
 /* Loading Spinner */
 .loading-spinner {
   display: flex;
@@ -159,6 +191,12 @@ body {
   color: var(--dark-color);
 }
 
+.form-select {
+  border-radius: 8px;
+  border: 2px solid #e0e0e0;
+  padding: 12px 15px;
+}
+
 /* Alert Styles */
 .alert {
   border-radius: 10px;
@@ -175,6 +213,10 @@ body {
   background: linear-gradient(135deg, var(--primary-color) 0%, var(--accent-color) 100%);
   color: white;
   border-radius: 15px 15px 0 0;
+}
+
+.modal-header-pink {
+  background: linear-gradient(135deg, #f72585 0%, #b5179e 100%);
 }
 
 .modal-header .btn-close {
@@ -198,6 +240,14 @@ body {
   text-align: center;
 }
 
+.stat-card-pink {
+  background: linear-gradient(135deg, #f72585 0%, #b5179e 100%);
+}
+
+.stat-card-cyan {
+  background: linear-gradient(135deg, #4cc9f0 0%, #4895ef 100%);
+}
+
 .stat-card .stat-number {
   font-size: 2.5rem;
   font-weight: 700;
@@ -208,3 +258,19 @@ body {
   opacity: 0.9;
 }
 
+/* Modal Backdrop */
+.modal-backdrop {
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+/* Input Group */
+.input-group-text {
+  border-radius: 8px 0 0 8px;
+  border: 2px solid #e0e0e0;
+  border-right: none;
+  background: #f8f9fa;
+}
+
+.input-group .form-control {
+  border-radius: 0 8px 8px 0;
+}

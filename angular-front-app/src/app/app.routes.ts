@@ -1,22 +1,29 @@
 import { Routes } from '@angular/router';
 
 export const routes: Routes = [
-  { path: '', redirectTo: '/home', pathMatch: 'full' },
-  { 
-    path: 'home', 
-    loadComponent: () => import('./components/home/home.component').then(m => m.HomeComponent)
+  {
+    path: '',
+    redirectTo: 'home',
+    pathMatch: 'full'
   },
-  { 
-    path: 'keynotes', 
-    loadComponent: () => import('./components/keynotes/keynote-list/keynote-list.component').then(m => m.KeynoteListComponent)
+  {
+    path: 'home',
+    loadComponent: () => import('./features/home/home').then(m => m.Home)
   },
-  { 
-    path: 'conferences', 
-    loadComponent: () => import('./components/conferences/conference-list/conference-list.component').then(m => m.ConferenceListComponent)
+  {
+    path: 'keynotes',
+    loadComponent: () => import('./features/keynotes/keynote-list/keynote-list').then(m => m.KeynoteList)
   },
-  { 
-    path: 'conferences/:id', 
-    loadComponent: () => import('./components/conferences/conference-detail/conference-detail.component').then(m => m.ConferenceDetailComponent)
+  {
+    path: 'conferences',
+    loadComponent: () => import('./features/conferences/conference-list/conference-list').then(m => m.ConferenceList)
+  },
+  {
+    path: 'conferences/:id',
+    loadComponent: () => import('./features/conferences/conference-detail/conference-detail').then(m => m.ConferenceDetail)
+  },
+  {
+    path: '**',
+    redirectTo: 'home'
   }
 ];
-

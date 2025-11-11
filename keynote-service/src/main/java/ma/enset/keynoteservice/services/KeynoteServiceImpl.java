@@ -1,7 +1,5 @@
 package ma.enset.keynoteservice.services;
 
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import ma.enset.keynoteservice.dtos.KeynoteDTO;
 import ma.enset.keynoteservice.dtos.KeynoteRequestDTO;
 import ma.enset.keynoteservice.entities.Keynote;
@@ -9,6 +7,8 @@ import ma.enset.keynoteservice.exceptions.KeynoteAlreadyExistsException;
 import ma.enset.keynoteservice.exceptions.KeynoteNotFoundException;
 import ma.enset.keynoteservice.mappers.KeynoteMapper;
 import ma.enset.keynoteservice.repositories.KeynoteRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -16,12 +16,17 @@ import java.util.List;
 
 @Service
 @Transactional
-@RequiredArgsConstructor
-@Slf4j
 public class KeynoteServiceImpl implements KeynoteService {
+    
+    private static final Logger log = LoggerFactory.getLogger(KeynoteServiceImpl.class);
     
     private final KeynoteRepository keynoteRepository;
     private final KeynoteMapper keynoteMapper;
+    
+    public KeynoteServiceImpl(KeynoteRepository keynoteRepository, KeynoteMapper keynoteMapper) {
+        this.keynoteRepository = keynoteRepository;
+        this.keynoteMapper = keynoteMapper;
+    }
     
     @Override
     public KeynoteDTO createKeynote(KeynoteRequestDTO keynoteRequestDTO) {
@@ -119,4 +124,3 @@ public class KeynoteServiceImpl implements KeynoteService {
         log.info("Keynote deleted successfully with id: {}", id);
     }
 }
-

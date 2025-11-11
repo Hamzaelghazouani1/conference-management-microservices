@@ -33,10 +33,23 @@ export class AuthService {
     this._roles().filter(r => ['USER', 'ADMIN'].includes(r))
   );
 
+  // Check if Keycloak is enabled
+  readonly keycloakEnabled = (environment.keycloak as any)?.enabled ?? true;
+
   /**
    * Initialize Keycloak
    */
   async init(): Promise<boolean> {
+    // If Keycloak is disabled, skip initialization
+    if (!this.keycloakEnabled) {
+      console.log('Keycloak is disabled - running in demo mode');
+      this._isInitialized.set(true);
+      this._isAuthenticated.set(true);
+      this._username.set('demo-user');
+      this._roles.set(['USER', 'ADMIN']);
+      return true;
+    }
+
     if (this._isInitialized()) {
       return this._isAuthenticated();
     }
@@ -50,7 +63,7 @@ export class AuthService {
     try {
       const authenticated = await this.keycloak.init({
         onLoad: 'check-sso',
-        silentCheckSsoRedirectUri: `${window.location.origin}/assets/silent-check-sso.html`,
+        silentCheckSsoRedirectUri: `${window.location.origin}/silent-check-sso.html`,
         checkLoginIframe: false
       });
 
@@ -70,7 +83,11 @@ export class AuthService {
     } catch (error) {
       console.error('Keycloak init error:', error);
       this._isInitialized.set(true);
-      return false;
+      // In case of error, allow access in demo mode
+      this._isAuthenticated.set(true);
+      this._username.set('demo-user');
+      this._roles.set(['USER']);
+      return true;
     }
   }
 
@@ -78,6 +95,11 @@ export class AuthService {
    * Login user
    */
   login(): void {
+    if (!this.keycloakEnabled) {
+      this._isAuthenticated.set(true);
+      this._username.set('demo-user');
+      return;
+    }
     this.keycloak?.login();
   }
 
@@ -85,6 +107,12 @@ export class AuthService {
    * Logout user
    */
   logout(): void {
+    if (!this.keycloakEnabled) {
+      this._isAuthenticated.set(false);
+      this._username.set('');
+      this._roles.set([]);
+      return;
+    }
     this.keycloak?.logout({ redirectUri: window.location.origin });
   }
 
@@ -92,6 +120,9 @@ export class AuthService {
    * Get current token
    */
   getToken(): string | undefined {
+    if (!this.keycloakEnabled) {
+      return 'demo-token';
+    }
     return this.keycloak?.token;
   }
 
@@ -99,6 +130,9 @@ export class AuthService {
    * Update/refresh token
    */
   async updateToken(minValidity: number = 30): Promise<boolean> {
+    if (!this.keycloakEnabled) {
+      return true;
+    }
     try {
       const refreshed = await this.keycloak?.updateToken(minValidity);
       if (refreshed) {

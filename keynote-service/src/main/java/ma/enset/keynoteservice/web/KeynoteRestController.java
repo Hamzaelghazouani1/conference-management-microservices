@@ -6,7 +6,6 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
-import lombok.RequiredArgsConstructor;
 import ma.enset.keynoteservice.dtos.KeynoteDTO;
 import ma.enset.keynoteservice.dtos.KeynoteRequestDTO;
 import ma.enset.keynoteservice.services.KeynoteService;
@@ -18,11 +17,14 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/keynotes")
-@RequiredArgsConstructor
 @Tag(name = "Keynote Management", description = "APIs pour la gestion des intervenants (Keynotes)")
 public class KeynoteRestController {
     
     private final KeynoteService keynoteService;
+    
+    public KeynoteRestController(KeynoteService keynoteService) {
+        this.keynoteService = keynoteService;
+    }
     
     @PostMapping
     @Operation(summary = "Créer un nouveau keynote", description = "Crée un nouvel intervenant dans le système")
@@ -111,4 +113,3 @@ public class KeynoteRestController {
         return ResponseEntity.noContent().build();
     }
 }
-

@@ -6,7 +6,6 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
-import lombok.RequiredArgsConstructor;
 import ma.enset.conferenceservice.dtos.ConferenceDTO;
 import ma.enset.conferenceservice.dtos.ConferenceRequestDTO;
 import ma.enset.conferenceservice.dtos.ReviewRequestDTO;
@@ -22,11 +21,14 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/conferences")
-@RequiredArgsConstructor
 @Tag(name = "Conference Management", description = "APIs pour la gestion des conférences")
 public class ConferenceRestController {
     
     private final ConferenceService conferenceService;
+    
+    public ConferenceRestController(ConferenceService conferenceService) {
+        this.conferenceService = conferenceService;
+    }
     
     @PostMapping
     @Operation(summary = "Créer une nouvelle conférence", description = "Crée une nouvelle conférence dans le système")
@@ -145,4 +147,3 @@ public class ConferenceRestController {
         return ResponseEntity.noContent().build();
     }
 }
-

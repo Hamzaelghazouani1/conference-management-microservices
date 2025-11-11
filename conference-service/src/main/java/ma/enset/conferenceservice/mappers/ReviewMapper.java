@@ -3,21 +3,38 @@ package ma.enset.conferenceservice.mappers;
 import ma.enset.conferenceservice.dtos.ReviewDTO;
 import ma.enset.conferenceservice.dtos.ReviewRequestDTO;
 import ma.enset.conferenceservice.entities.Review;
-import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
+import org.springframework.stereotype.Component;
 
+import java.time.LocalDate;
 import java.util.List;
+import java.util.stream.Collectors;
 
-@Mapper(componentModel = "spring")
-public interface ReviewMapper {
+@Component
+public class ReviewMapper {
     
-    ReviewDTO toDTO(Review review);
+    public ReviewDTO toDTO(Review review) {
+        if (review == null) return null;
+        return ReviewDTO.builder()
+                .id(review.getId())
+                .date(review.getDate())
+                .texte(review.getTexte())
+                .note(review.getNote())
+                .build();
+    }
     
-    @Mapping(target = "id", ignore = true)
-    @Mapping(target = "conference", ignore = true)
-    @Mapping(target = "date", expression = "java(java.time.LocalDate.now())")
-    Review toEntity(ReviewRequestDTO reviewRequestDTO);
+    public Review toEntity(ReviewRequestDTO dto) {
+        if (dto == null) return null;
+        return Review.builder()
+                .date(LocalDate.now())
+                .texte(dto.getTexte())
+                .note(dto.getNote())
+                .build();
+    }
     
-    List<ReviewDTO> toDTOList(List<Review> reviews);
+    public List<ReviewDTO> toDTOList(List<Review> reviews) {
+        if (reviews == null) return null;
+        return reviews.stream()
+                .map(this::toDTO)
+                .collect(Collectors.toList());
+    }
 }
-

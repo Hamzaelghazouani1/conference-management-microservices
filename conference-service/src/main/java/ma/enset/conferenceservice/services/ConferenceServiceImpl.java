@@ -1,8 +1,6 @@
 package ma.enset.conferenceservice.services;
 
 import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import ma.enset.conferenceservice.clients.KeynoteRestClient;
 import ma.enset.conferenceservice.dtos.*;
 import ma.enset.conferenceservice.entities.Conference;
@@ -14,6 +12,8 @@ import ma.enset.conferenceservice.mappers.ConferenceMapper;
 import ma.enset.conferenceservice.mappers.ReviewMapper;
 import ma.enset.conferenceservice.repositories.ConferenceRepository;
 import ma.enset.conferenceservice.repositories.ReviewRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -22,15 +22,25 @@ import java.util.List;
 
 @Service
 @Transactional
-@RequiredArgsConstructor
-@Slf4j
 public class ConferenceServiceImpl implements ConferenceService {
+    
+    private static final Logger log = LoggerFactory.getLogger(ConferenceServiceImpl.class);
     
     private final ConferenceRepository conferenceRepository;
     private final ReviewRepository reviewRepository;
     private final ConferenceMapper conferenceMapper;
     private final ReviewMapper reviewMapper;
     private final KeynoteRestClient keynoteRestClient;
+    
+    public ConferenceServiceImpl(ConferenceRepository conferenceRepository, ReviewRepository reviewRepository,
+                                  ConferenceMapper conferenceMapper, ReviewMapper reviewMapper,
+                                  KeynoteRestClient keynoteRestClient) {
+        this.conferenceRepository = conferenceRepository;
+        this.reviewRepository = reviewRepository;
+        this.conferenceMapper = conferenceMapper;
+        this.reviewMapper = reviewMapper;
+        this.keynoteRestClient = keynoteRestClient;
+    }
     
     @Override
     public ConferenceDTO createConference(ConferenceRequestDTO conferenceRequestDTO) {
@@ -205,4 +215,3 @@ public class ConferenceServiceImpl implements ConferenceService {
                 .build();
     }
 }
-

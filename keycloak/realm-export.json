@@ -1,0 +1,98 @@
+{
+  "realm": "conference-realm",
+  "enabled": true,
+  "sslRequired": "external",
+  "registrationAllowed": false,
+  "loginWithEmailAllowed": true,
+  "duplicateEmailsAllowed": false,
+  "resetPasswordAllowed": true,
+  "editUsernameAllowed": false,
+  "bruteForceProtected": true,
+  "roles": {
+    "realm": [
+      {
+        "name": "USER",
+        "description": "Regular user role"
+      },
+      {
+        "name": "ADMIN",
+        "description": "Administrator role"
+      }
+    ]
+  },
+  "users": [
+    {
+      "username": "admin",
+      "enabled": true,
+      "emailVerified": true,
+      "firstName": "Admin",
+      "lastName": "User",
+      "email": "admin@conference.com",
+      "credentials": [
+        {
+          "type": "password",
+          "value": "admin",
+          "temporary": false
+        }
+      ],
+      "realmRoles": ["ADMIN", "USER"]
+    },
+    {
+      "username": "user",
+      "enabled": true,
+      "emailVerified": true,
+      "firstName": "Regular",
+      "lastName": "User",
+      "email": "user@conference.com",
+      "credentials": [
+        {
+          "type": "password",
+          "value": "user",
+          "temporary": false
+        }
+      ],
+      "realmRoles": ["USER"]
+    }
+  ],
+  "clients": [
+    {
+      "clientId": "conference-client",
+      "name": "Conference Angular Client",
+      "enabled": true,
+      "publicClient": true,
+      "directAccessGrantsEnabled": true,
+      "standardFlowEnabled": true,
+      "implicitFlowEnabled": false,
+      "protocol": "openid-connect",
+      "redirectUris": [
+        "http://localhost:4200/*",
+        "http://localhost:8888/*"
+      ],
+      "webOrigins": [
+        "http://localhost:4200",
+        "http://localhost:8888"
+      ],
+      "defaultClientScopes": [
+        "web-origins",
+        "profile",
+        "roles",
+        "email"
+      ]
+    },
+    {
+      "clientId": "gateway-client",
+      "name": "Gateway Service Client",
+      "enabled": true,
+      "publicClient": false,
+      "bearerOnly": true,
+      "protocol": "openid-connect"
+    }
+  ],
+  "defaultDefaultClientScopes": [
+    "web-origins",
+    "profile",
+    "roles",
+    "email"
+  ]
+}
+
